@@ -1,7 +1,6 @@
-<h1>Done</h1>
-<% @arr.each do |element| %>
-	<p>
-		<p><%= link_to element, controller: "file_uploads", action: "show", id: element.to_s %></p>
-		<!--<a href="file:///<%= element %>">element</a>-->
-	</p>
+<h1>File Upload</h1>
+<%= form_tag({action: :create}, multipart: true) do %>
+    <p><label for="upload_file">Select File</label> : 
+    <%= file_field("upload", "datafile") %></p>
+    <%= submit_tag "Upload" %>
 <% end %>

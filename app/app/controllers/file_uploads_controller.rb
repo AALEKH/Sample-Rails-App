@@ -4,6 +4,7 @@ class FileUploadsController < ApplicationController
   # GET /file_uploads
   # GET /file_uploads.json
   def index
+    @arr = Dir.glob("/Users/browserstack/Desktop/Sample-Rails-App/uploads/*")
   end
 
   # GET /file_uploads/1
@@ -11,14 +12,17 @@ class FileUploadsController < ApplicationController
   def show
     @aa = params[:id]
     @bb = params[:format]
-    send_file @aa + "." + @bb
+    if @bb.present?
+      send_file @aa + "." + @bb
+    else
+      send_file @aa 
+    end   
     #render :text => "File has been uploaded successfully"
   end
 
   # GET /file_uploads/new
   def new
-    post = FileUpload.save(params[:upload])
-    @arr = Dir.glob("/Users/browserstack/Desktop/Sample-Rails-App/uploads/*")
+    #post = FileUpload.save(params[:upload])
   end
 
   # GET /file_uploads/1/edit
@@ -29,7 +33,7 @@ class FileUploadsController < ApplicationController
   # POST /file_uploads.json
   def create
     post = FileUpload.save(params[:upload])
-    render :text => "File has been uploaded successfully"
+    redirect_to :controller => 'file_uploads', :action => 'index'
     #@file_upload = FileUpload.new(file_upload_params)
 
     #respond_to do |format|

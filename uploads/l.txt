@@ -1,0 +1,1 @@
+{"wait_time":5,"orientation":"portrait","mac_res":"1024x768","job_id":"55b9e8d957ef31d11195333cedf593b3c8dcdaca","callback_url":null,"win_res":"1024x768","quality":"compressed","screenshots":[{"os":"Windows","state":"pending","browser":"ie","id":"9859d148e52668da42caf98cb7edc75035b90e97","url":"http://google.com","os_version":"7","browser_version":"8.0"}]}
