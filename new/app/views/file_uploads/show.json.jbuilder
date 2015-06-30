@@ -1,1 +1,1 @@
-json.extract! @file_upload, :id, :filename, :string, :created_at, :updated_at
+json.extract! @file_upload, :id, :filename, :filepath, :created_at, :updated_at

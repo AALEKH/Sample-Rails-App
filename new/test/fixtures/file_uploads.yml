@@ -2,8 +2,8 @@
 
 one:
   filename: MyString
-  string: MyString
+  filepath: MyString
 
 two:
   filename: MyString
-  string: MyString
+  filepath: MyString

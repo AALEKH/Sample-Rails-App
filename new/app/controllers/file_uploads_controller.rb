@@ -33,6 +33,9 @@ class FileUploadsController < ApplicationController
   def create
     saveFile(params[:upload])
     #params[:file].original_filename
+    @name =  params[:upload]['datafile'].original_filename
+    @directory = "/Users/browserstack/Desktop/Sample-Rails-App/uploads"
+    FileUpload.create(filename: @name, filepath: @directory)
     redirect_to :controller => 'file_uploads', :action => 'index'
     #@file_upload = FileUpload.new(file_upload_params)
 
