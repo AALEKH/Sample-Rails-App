@@ -1,5 +1,4 @@
-<h1>New Micropost</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', microposts_path %>
+<h1>Done</h1>
+<% @arr.each do |element| %>
+  <p><%= link_to "Raw blast output", element %></p>
+<% end %>

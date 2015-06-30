@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+  resources :file_uploads
   resources :microposts
   resources :users
   root 'users#index'
+
+  post 'file_uploads/new' => 'file_uploads#new'
+  post 'file_uploads/create' => 'file_uploads#create'  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
