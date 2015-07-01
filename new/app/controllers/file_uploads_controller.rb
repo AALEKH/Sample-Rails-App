@@ -25,12 +25,13 @@ class FileUploadsController < ApplicationController
   # POST /file_uploads
   # POST /file_uploads.json
   def create
-    saveFile(params[:upload])
+    FileUpload.saveFile(params[:upload])
     #params[:file].original_filename
     @name =  params[:upload]['datafile'].original_filename
     @directory = "/Users/browserstack/Desktop/Sample-Rails-App/uploads"
     FileUpload.create(filename: @name, filepath: @directory)
-    redirect_to :controller => 'file_uploads', :action => 'index'
+    #redirect_to :controller => 'file_uploads', :action => 'index'
+    redirect_to(:action=>'index')
     #end
   end
 
@@ -39,15 +40,6 @@ class FileUploadsController < ApplicationController
     def set_file_upload
       #@file_upload = FileUpload.find(params[:id])
     end
-
-    def saveFile(upload)
-      name =  upload['datafile'].original_filename
-      directory = "/Users/browserstack/Desktop/Sample-Rails-App/uploads"
-      # create the file path
-      path = File.join(directory, name)
-      # write the file
-      File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
-    end  
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def file_upload_params

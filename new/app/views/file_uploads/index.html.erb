@@ -4,11 +4,10 @@
     <%= file_field("upload", "datafile") %></p>
     <%= submit_tag "Upload" %>
 <% end %>
-<p><%= link_to "New Upload", :controller => "file_uploads", :action => "new" %></p>
 <% @arr.each do |element| %>
   <p>
     <p>
-    	<%= link_to element[:filename], controller: "file_uploads", action: "show", id: element[:id].to_s %>
+    	<%= link_to element[:filename], element, id: element[:id].to_s %>
     	<%= link_to 'Destroy', element, method: :delete, id: element[:id].to_s %>
     </p>
   </p>
