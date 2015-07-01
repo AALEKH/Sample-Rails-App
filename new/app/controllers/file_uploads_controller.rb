@@ -1,32 +1,26 @@
 class FileUploadsController < ApplicationController
-  #before_action :set_file_upload, only: [:show, :edit, :update, :destroy]
+  before_action :set_file_upload, only: [:show, :destroy]
 
   # GET /file_uploads
   # GET /file_uploads.json
   def index
-    @arr = Dir.glob("/Users/browserstack/Desktop/Sample-Rails-App/uploads/*")
+    @arr = FileUpload.select(:id, :filename)
   end
 
   # GET /file_uploads/1
   # GET /file_uploads/1.json
   def show
-    @aa = params[:id]
-    @bb = params[:format]
-    if @bb.present?
-      send_file @aa + "." + @bb
-    else
-      send_file @aa 
-    end  
+    #@aa = params[:file]
+    @file = FileUpload.where(id: params[:id])
+    send_file @file[0][:filepath] + "/" + @file[0][:filename]
   end
 
-  # GET /file_uploads/new
-  def new
-    @file_upload = FileUpload.new
-  end
-
-  # GET /file_uploads/1/edit
-  def edit
-  end
+  def destroy
+    @file = FileUpload.where(id: params[:id])
+    File.delete(@file[0][:filepath] + "/" + @file[0][:filename])
+    FileUpload.destroy_all(id: params[:id])
+    redirect_to :controller => 'file_uploads', :action => 'index'
+  end  
 
   # POST /file_uploads
   # POST /file_uploads.json
@@ -37,41 +31,7 @@ class FileUploadsController < ApplicationController
     @directory = "/Users/browserstack/Desktop/Sample-Rails-App/uploads"
     FileUpload.create(filename: @name, filepath: @directory)
     redirect_to :controller => 'file_uploads', :action => 'index'
-    #@file_upload = FileUpload.new(file_upload_params)
-
-    #respond_to do |format|
-    #  if @file_upload.save
-    #    format.html { redirect_to @file_upload, notice: 'File upload was successfully created.' }
-    #    format.json { render :show, status: :created, location: @file_upload }
-    #  else
-    #    format.html { render :new }
-    #    format.json { render json: @file_upload.errors, status: :unprocessable_entity }
-    #  end
     #end
-  end
-
-  # PATCH/PUT /file_uploads/1
-  # PATCH/PUT /file_uploads/1.json
-  def update
-    respond_to do |format|
-      if @file_upload.update(file_upload_params)
-        format.html { redirect_to @file_upload, notice: 'File upload was successfully updated.' }
-        format.json { render :show, status: :ok, location: @file_upload }
-      else
-        format.html { render :edit }
-        format.json { render json: @file_upload.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /file_uploads/1
-  # DELETE /file_uploads/1.json
-  def destroy
-    @file_upload.destroy
-    respond_to do |format|
-      format.html { redirect_to file_uploads_url, notice: 'File upload was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private

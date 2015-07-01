@@ -1,8 +1,15 @@
-<h1>Done</h1>
+<h1>File Upload</h1>
+<%= form_tag({action: :create}, multipart: true) do %>
+    <p><label for="upload_file">Select File</label> : 
+    <%= file_field("upload", "datafile") %></p>
+    <%= submit_tag "Upload" %>
+<% end %>
 <p><%= link_to "New Upload", :controller => "file_uploads", :action => "new" %></p>
 <% @arr.each do |element| %>
   <p>
-    <p><%= link_to element, controller: "file_uploads", action: "show", id: element.to_s %></p>
-    <!--<a href="file:///<%= element %>">element</a>-->
+    <p>
+    	<%= link_to element[:filename], controller: "file_uploads", action: "show", id: element[:id].to_s %>
+    	<%= link_to 'Destroy', element, method: :delete, id: element[:id].to_s %>
+    </p>
   </p>
 <% end %>
