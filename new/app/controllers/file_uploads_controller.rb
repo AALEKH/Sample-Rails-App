@@ -7,8 +7,13 @@ class FileUploadsController < ApplicationController
 
   def show
     #@aa = params[:file]
-    @file = FileUpload.where(id: params[:id], name: session[:hello])
-    send_file @file[0][:filepath] + "/" + @file[0][:filename]
+    if params[:id] == "shutdownSession"
+      reset_session
+      render :text => "End of session"
+    else
+      @file = FileUpload.where(id: params[:id], name: session[:hello])
+      send_file @file[0][:filepath] + "/" + @file[0][:filename]
+    end  
   end
 
   def destroy
