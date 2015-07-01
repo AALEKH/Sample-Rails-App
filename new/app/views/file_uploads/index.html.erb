@@ -4,6 +4,7 @@
     <%= file_field("upload", "datafile") %></p>
     <%= submit_tag "Upload" %>
 <% end %>
+<p>Hello <%= session[:hello] %></p>
 <% @arr.each do |element| %>
   <p>
     <p>
