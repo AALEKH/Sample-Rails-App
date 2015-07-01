@@ -1,3 +1,14 @@
+<script type="text/javascript">
+function removeElement (id) {
+	// body...
+	i = 0
+	while (i < 2) {
+    	var elem = document.getElementById(id);
+		elem.parentNode.removeChild(elem);
+    	i++;
+	}
+}
+</script>
 <h1>File Upload</h1>
 <%= form_tag({action: :create}, multipart: true) do %>
     <p><label for="upload_file">Select File</label> : 
@@ -8,8 +19,8 @@
 <% @arr.each do |element| %>
   <p>
     <p>
-    	<%= link_to element[:filename], element, id: element[:id].to_s %>
-    	<%= link_to 'Destroy', element, method: :delete, id: element[:id].to_s %>
+    <%= render partial: "file", locals: { user: element } %>
+    <%= link_to "Destroy", element, method: :delete,  :onclick => "removeElement(#{element[:id]})", id: element[:id],data: { confirm: "Really? ", remote: true } %> 
     </p>
   </p>
 <% end %>
