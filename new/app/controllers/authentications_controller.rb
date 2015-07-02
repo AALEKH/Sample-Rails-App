@@ -24,12 +24,13 @@ class AuthenticationsController < ApplicationController
   # POST /authentications
   # POST /authentications.json
   def create
-    @authentication = Authentication.new(authentication_params)
-
+    #@authentication = Authentication.new(authentication_params)
+    @authentication = Authentication.new(:name => params["username"])
     #respond_to do |format|
       #if 
     @authentication.save
-    session[:hello] = params[:authentications]["username"]
+    #session[:hello] = params[:authentications]["username"]
+    session[:hello] = @authentication.id
     redirect_to :controller => 'file_uploads', :action => 'index'
         #format.html { redirect_to @authentication, notice: 'Authentication was successfully created.' }
         #format.json { render :show, status: :created, location: @authentication }

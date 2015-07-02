@@ -24,8 +24,10 @@ class SessionsController < ApplicationController
   # POST /sessions
   # POST /sessions.json
   def create
-    session[:hello] = session_params["username"]
-    if Authentication.exists?(:username => session[:hello])
+
+    if Authentication.exists?(:name => params["username"])
+      @session_variable = Authentication.where(name: params["username"]).pluck(:id)
+      session[:hello] = @session_variable.join(',')
       redirect_to :controller => 'file_uploads', :action => 'index'
     else
       redirect_to :controller => 'authentications', :action => 'new'

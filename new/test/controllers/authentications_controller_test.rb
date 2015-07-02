@@ -18,7 +18,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
 
   test "should create authentication" do
     assert_difference('Authentication.count') do
-      post :create, authentication: { username: @authentication.username }
+      post :create, authentication: { name: @authentication.name }
     end
 
     assert_redirected_to authentication_path(assigns(:authentication))
@@ -35,7 +35,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
   end
 
   test "should update authentication" do
-    patch :update, id: @authentication, authentication: { username: @authentication.username }
+    patch :update, id: @authentication, authentication: { name: @authentication.name }
     assert_redirected_to authentication_path(assigns(:authentication))
   end
 

@@ -21,6 +21,10 @@ module New
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.before_configuration do
+        ENV["file-path"] = "/Users/browserstack/Desktop/Sample-Rails-App/uploads/"
+    end
+    #config.filepath = "/Users/browserstack/Desktop/Sample-Rails-App/uploads"
     config.active_record.raise_in_transactional_callbacks = true
   end
 end

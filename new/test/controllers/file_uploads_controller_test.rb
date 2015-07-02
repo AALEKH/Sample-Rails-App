@@ -18,7 +18,7 @@ class FileUploadsControllerTest < ActionController::TestCase
 
   test "should create file_upload" do
     assert_difference('FileUpload.count') do
-      post :create, file_upload: { filename: @file_upload.filename, filepath: @file_upload.filepath }
+      post :create, file_upload: { authentication_id: @file_upload.authentication_id, filename: @file_upload.filename, filepath: @file_upload.filepath }
     end
 
     assert_redirected_to file_upload_path(assigns(:file_upload))
@@ -35,7 +35,7 @@ class FileUploadsControllerTest < ActionController::TestCase
   end
 
   test "should update file_upload" do
-    patch :update, id: @file_upload, file_upload: { filename: @file_upload.filename, filepath: @file_upload.filepath }
+    patch :update, id: @file_upload, file_upload: { authentication_id: @file_upload.authentication_id, filename: @file_upload.filename, filepath: @file_upload.filepath }
     assert_redirected_to file_upload_path(assigns(:file_upload))
   end
 

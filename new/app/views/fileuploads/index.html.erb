@@ -1,0 +1,27 @@
+<script type="text/javascript">
+function removeElement (id) {
+  // body...
+  i = 0
+  while (i < 2) {
+      var elem = document.getElementById(id);
+    elem.parentNode.removeChild(elem);
+      i++;
+  }
+}
+</script>
+<h1>File Upload</h1>
+<%= form_tag({action: :create}, multipart: true) do %>
+    <p><label for="upload_file">Select File</label> : 
+    <%= file_field("upload", "datafile") %></p>
+    <%= submit_tag "Upload" %>
+<% end %>
+<p>Hello <%= session[:hello] %></p>
+<% @arr.each do |element| %>
+  <p>
+    <p>
+    <%= render partial: "file", locals: { user: element } %>
+    <%= link_to "Destroy", element, method: :delete,  :onclick => "removeElement(#{element[:id]})", id: element[:id],data: { confirm: "Really? ", remote: true } %> 
+    </p>
+  </p>
+<% end %>
+<%= link_to "Log out", action: :shutdownSession %>

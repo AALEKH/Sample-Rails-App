@@ -1,7 +1,7 @@
 <%= form_for :authentications, url: authentications_path do |f| %>
   <div class="field">
     <%= f.label :username %><br>
-    <%= f.text_field :username %>
+   <input type="text" name="username">
   </div>
   <div class="actions">
     <%= f.submit "Register" %>
