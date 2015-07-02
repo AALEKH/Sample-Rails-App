@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :sessions
-  resources :authentications
+  resources :sessions, :only => [:create, :new]
+  resources :authentications, :only => [:create, :new]
   resources :file_uploads, :only => [:show, :index, :create, :destroy]
   resources :file_uploads do
     member do
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   delete "file_uploads/shutdownSession" => "file_uploads#shutdownSession"
+  get    "/file_uploads"      => "file_uploads#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

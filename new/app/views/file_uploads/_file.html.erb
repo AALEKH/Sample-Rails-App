@@ -1,1 +1,8 @@
-<%= link_to user[:filename], user, id: user[:id].to_s %>
+<% @arr.each do |element| %>
+  <p>
+    <p>
+<%= link_to element[:filename], element, id: element[:id].to_s %>    
+ <%= link_to "Destroy", element, method: :delete,  :onclick => "removeElement(#{element[:id]})", id: element[:id],data: { confirm: "Really? ", remote: true } %> 
+    </p>
+  </p>
+<% end %>

@@ -21,7 +21,11 @@ class FileUploadsController < ApplicationController
     @file = FileUpload.where(id: params[:id], authentication_id: session[:hello])
     File.delete(@file[0][:filepath] + "/" + @file[0][:filename])
     FileUpload.destroy_all(id: params[:id])
-    redirect_to :controller => 'fileuploads', :action => 'index'
+    @arr = FileUpload.select(:id, :filename).where(authentication_id: session[:hello])
+    respond_to do |format|
+      format.js {render "index"}
+    end
+    #redirect_to :controller => 'fileuploads', :action => 'index'
   end  
 
   def create
@@ -31,8 +35,7 @@ class FileUploadsController < ApplicationController
     @directory = ENV["file-path"]
     @auth_id = session[:hello]
     FileUpload.create(filename: @name, filepath: @directory, authentication_id: @auth_id)
-    binding.pry
-    redirect_to(:action=>'index')
+    redirect_to "/file_uploads" 
     #end
   end
 

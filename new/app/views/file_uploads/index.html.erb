@@ -1,5 +1,5 @@
 <script type="text/javascript">
-function removeElement (id) {
+/*function removeElement (id) {
 	// body...
 	i = 0
 	while (i < 2) {
@@ -7,7 +7,7 @@ function removeElement (id) {
 		elem.parentNode.removeChild(elem);
     	i++;
 	}
-}
+}*/
 </script>
 <h1>File Upload</h1>
 <%= form_tag({action: :create}, multipart: true) do %>
@@ -16,12 +16,8 @@ function removeElement (id) {
     <%= submit_tag "Upload" %>
 <% end %>
 <p>Hello <%= session[:hello] %></p>
-<% @arr.each do |element| %>
-  <p>
-    <p>
-    <%= render partial: "file", locals: { user: element } %>
-    <%= link_to "Destroy", element, method: :delete,  :onclick => "removeElement(#{element[:id]})", id: element[:id],data: { confirm: "Really? ", remote: true } %> 
-    </p>
-  </p>
-<% end %>
+<div id="ajaxDelete">
+<%= render partial: "file", object: @arr %>
+
+</div>
 <%= link_to "New User", action: :shutdownSession %>

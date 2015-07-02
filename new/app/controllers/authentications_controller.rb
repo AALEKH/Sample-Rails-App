@@ -1,25 +1,12 @@
 class AuthenticationsController < ApplicationController
   before_action :set_authentication, only: [:show, :edit, :update, :destroy]
 
-  # GET /authentications
-  # GET /authentications.json
-  def index
-    @authentications = Authentication.all
-  end
-
-  # GET /authentications/1
-  # GET /authentications/1.json
-  def show
-  end
 
   # GET /authentications/new
   def new
     @authentication = Authentication.new
   end
 
-  # GET /authentications/1/edit
-  def edit
-  end
 
   # POST /authentications
   # POST /authentications.json
@@ -31,7 +18,9 @@ class AuthenticationsController < ApplicationController
     @authentication.save
     #session[:hello] = params[:authentications]["username"]
     session[:hello] = @authentication.id
-    redirect_to :controller => 'file_uploads', :action => 'index'
+    #redirect_to :controller => 'file_uploads', :action => 'index'
+    #redirect_to file_uploads
+    redirect_to "/file_uploads" 
         #format.html { redirect_to @authentication, notice: 'Authentication was successfully created.' }
         #format.json { render :show, status: :created, location: @authentication }
       #else
@@ -39,30 +28,6 @@ class AuthenticationsController < ApplicationController
       #  format.json { render json: @authentication.errors, status: :unprocessable_entity }
       #end
     #end
-  end
-
-  # PATCH/PUT /authentications/1
-  # PATCH/PUT /authentications/1.json
-  def update
-    respond_to do |format|
-      if @authentication.update(authentication_params)
-        format.html { redirect_to @authentication, notice: 'Authentication was successfully updated.' }
-        format.json { render :show, status: :ok, location: @authentication }
-      else
-        format.html { render :edit }
-        format.json { render json: @authentication.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /authentications/1
-  # DELETE /authentications/1.json
-  def destroy
-    @authentication.destroy
-    respond_to do |format|
-      format.html { redirect_to authentications_url, notice: 'Authentication was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
