@@ -1,5 +1,6 @@
 class FileUpload < ActiveRecord::Base
 	belongs_to :authentication
+  #validates  :upload, presence: true
 	def self.saveFile(upload)
       name =  upload['datafile'].original_filename
       directory = ENV["file-path"].to_s
